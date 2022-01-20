@@ -2,7 +2,7 @@
 
 Ever left your encrypted laptop unlocked in a public place? I have, and every time, I worry someone might steal my data. This project implements remote screen lock and shutdown of your Linux based machine.
 
-bCloud establishes a Socket.IO connection using mutual TLS authentication. The client-server model is written in such a way that if you issue a lock or shutdown command, it will eventually always reach your client machine, even if they are taken offline! This is due to the client keeping a lock and shutdown timer, causing it to lock its screen after losing connectivity to the server and eventually shutting down the machine, unless it has been manually unlocked by entering your password.
+bCloud establishes a Socket.IO connection using mutual TLS authentication. The client-server model is written in such a way that if you issue a lock or shutdown command, it will eventually always reach your client machines, even if they are taken offline! This is possible due to the client starting a lock and shutdown timer if it loses its connection to the server, guaranteeing that your machine will remain safe. If you unlock your screen after it has been automatically locked, the shutdown timer is cancelled, allowing you to work offline.
 
 ## Building instructions
 
@@ -17,4 +17,3 @@ On the server side, copy the source folder and execute `node index.js`, and you 
 - There is no documentation or code comments. This project was written for use by myself, but after showing it to some friends, I was asked to put the source code on Github.
 - The bCloud client currently only works on Gnome 3 in Linux. If you want support for other WMs or OSes, you need to change the `exec()` calls and file paths in `client.js`.
 - The client will pull an online and offline wallpaper from the server. The online wallpaper will be shown when the client is connected to the server and the offline wallpaper will be shown otherwise. To use your own wallpaper, edit `wallpaper.png` and `wallpaper-offline.png` on the server. The reason this functionality is included is because I rotate wallpapers during the day, and I want them synced on all my machines.
--
